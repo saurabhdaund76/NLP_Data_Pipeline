@@ -1,0 +1,34 @@
+# Example configuration for scraping BBC News articles
+bbc_news:
+  base_url: "https://www.bbc.com/news"
+  selectors:
+    title: "h1.story-body__h1"  # CSS selector for article title
+    content: "div.story-body__inner p"  # CSS selector for article content
+    date: "div.date"  # CSS selector for publication date
+    author: "span.byline__name"  # CSS selector for author name
+
+# Example configuration for scraping Reuters articles
+reuters:
+  base_url: "https://www.reuters.com"
+  selectors:
+    title: "h1.article-headline"
+    content: "div.article-body p"
+    date: "time.article-date"
+    author: "div.byline__author"
+
+# Storage configuration
+storage:
+  type: "gcs"  # Options: "local" or "gcs"
+  
+  # Local storage settings
+  local:
+    base_path: "./data"
+    format: "json"  # Options: "json" or "csv"
+    
+  # Google Cloud Storage settings
+  gcs:
+    bucket_name: "your-bucket-name"  # Replace with your bucket name
+    project_id: "your-project-id"    # Replace with your project ID
+    folders:
+      bbc_news: "raw/bbc_news"
+      reuters: "raw/reuters" 

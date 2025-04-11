@@ -1,0 +1,63 @@
+# Web Scraping Configuration
+web_scraping:
+  bbc_news:
+    base_url: "https://www.bbc.com/news"
+    selectors:
+      title: "h1.story-body__h1"
+      content: "div.story-body__inner p"
+      date: "div.date"
+      author: "span.byline__name"
+
+  reuters:
+    base_url: "https://www.reuters.com"
+    selectors:
+      title: "h1.article-headline"
+      content: "div.article-body p"
+      date: "time.article-date"
+      author: "div.byline__author"
+
+# News API Configuration
+news_api:
+  api_key: "your-newsapi-key"  # Replace with actual API key
+  endpoints:
+    top_headlines:
+      endpoint: "top-headlines"
+      params:
+        country: "us"
+        category: "technology"
+        pageSize: 100
+
+    everything:
+      endpoint: "everything"
+      params:
+        q: "artificial intelligence"
+        language: "en"
+        sortBy: "publishedAt"
+        pageSize: 100
+
+# PDF Collection Configuration
+pdf_collection:
+  government_reports:
+    url: "https://www.whitehouse.gov/wp-content/uploads/2023/03/National-Artificial-Intelligence-Research-and-Development-Strategic-Plan-2023.pdf"
+    max_pages: 100
+
+  research_papers:
+    url: "https://arxiv.org/pdf/2303.12712.pdf"
+    max_pages: 50
+
+# Storage Configuration
+storage:
+  type: "gcs"  # or "local"
+  gcs:
+    bucket_name: "news-data-lake"
+    project_id: "your-project-id"
+    folders:
+      web_scraping: "raw/web_scraping"
+      news_api: "raw/news_api"
+      pdfs: "raw/pdfs"
+  local:
+    base_path: "/data/news"
+    folders:
+      web_scraping: "web_scraping"
+      news_api: "news_api"
+      pdfs: "pdfs" 
