@@ -1,3 +1,87 @@
+# Data Collectors Configuration
+
+# Common settings for all collectors
+common:
+  retry_count: 3
+  timeout: 30  # seconds
+  batch_size: 100
+
+# News API collector settings
+news_api:
+  base_url: "https://newsapi.org/v2"
+  endpoints:
+    everything: "/everything"
+    top_headlines: "/top-headlines"
+  rate_limit:
+    requests_per_day: 1000
+    requests_per_minute: 60
+  categories:
+    - technology
+    - business
+    - science
+  languages:
+    - en
+  countries:
+    - us
+    - gb
+    - in
+
+# Web scraper settings
+web_scraper:
+  user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+  wait_time: 2  # seconds between requests
+  timeout: 20
+  selectors:
+    title: "h1.article-title"
+    content: "div.article-content"
+    date: "span.article-date"
+    author: "span.author-name"
+  allowed_domains:
+    - "example-news.com"
+    - "tech-news.com"
+  blocked_paths:
+    - "/ads/"
+    - "/sponsored/"
+  pagination:
+    enabled: true
+    max_pages: 5
+
+# PDF collector settings
+pdf_collector:
+  max_file_size: 10485760  # 10MB
+  supported_versions: ["1.4", "1.5", "1.6", "1.7"]
+  extract_metadata: true
+  ocr_enabled: false
+  password_protected: false
+  timeout: 60
+
+# Error handling
+error_handling:
+  max_retries: 3
+  retry_delay: 5
+  log_level: "INFO"
+  error_types:
+    network:
+      retry: true
+      max_attempts: 5
+    parsing:
+      retry: false
+      log_level: "ERROR"
+    rate_limit:
+      retry: true
+      delay: 60
+
+# Monitoring
+monitoring:
+  enabled: true
+  metrics:
+    - collection_time
+    - success_rate
+    - error_count
+  alerts:
+    error_threshold: 10
+    latency_threshold: 30
+
 # Web Scraping Configuration
 web_scraping:
   bbc_news:

@@ -1,18 +1,23 @@
 # Git Guide for NLP Data Pipeline
 
-This guide provides detailed instructions for using Git with the NLP Data Pipeline project.
+## Getting Started
 
-## Table of Contents
-- [Initial Setup](#initial-setup)
-- [Basic Git Operations](#basic-git-operations)
-- [Branching Strategy](#branching-strategy)
-- [Best Practices](#best-practices)
-- [Common Workflows](#common-workflows)
-- [Troubleshooting](#troubleshooting)
+### 1. Initial Setup (First Time Only)
 
-## Initial Setup
+#### 1.1 Install Git
+```bash
+# For macOS (using Homebrew)
+brew install git
 
-### First-Time Git Configuration
+# For Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install git
+
+# For Windows
+# Download and install from https://git-scm.com/download/windows
+```
+
+#### 1.2 Configure Git (First Time Only)
 ```bash
 # Set your name and email
 git config --global user.name "Your Name"
@@ -26,19 +31,46 @@ git config --global core.autocrlf input  # For Mac/Linux
 # git config --global core.autocrlf true # For Windows
 ```
 
-### Project Setup
-```bash
-# Clone the repository
-git clone https://github.com/your-username/nlp-data-pipeline.git
-cd nlp-data-pipeline
+### 2. Getting the Repository
 
-# Create and switch to a new feature branch
-git checkout -b feature/your-feature-name
+#### 2.1 Clone the Repository
+1. Go to the repository page on GitHub
+2. Click the green "Code" button
+3. Copy the HTTPS URL (e.g., `https://github.com/username/nlp-data-pipeline.git`)
+
+```bash
+# Navigate to where you want to store the project
+cd ~/Documents/Projects  # or your preferred directory
+
+# Clone the repository
+git clone https://github.com/username/nlp-data-pipeline.git
+
+# Enter the project directory
+cd nlp-data-pipeline
 ```
 
-## Basic Git Operations
+#### 2.2 Set Up the Project
+```bash
+# Create virtual environment
+python -m venv venv
 
-### Daily Git Commands
+# Activate virtual environment
+# For Mac/Linux:
+source venv/bin/activate
+# For Windows:
+.\venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Copy environment template
+cp .env.example .env
+# Edit .env with your actual values
+```
+
+### 3. Basic Git Operations
+
+#### 3.1 Daily Git Commands
 ```bash
 # Check repository status
 git status
@@ -57,7 +89,7 @@ git push origin <branch-name>
 git pull origin <branch-name>
 ```
 
-### Viewing Changes
+#### 3.2 Viewing Changes
 ```bash
 # View changes in staged files
 git diff --staged
@@ -70,16 +102,16 @@ git log
 git log --oneline --graph --decorate  # Compact view
 ```
 
-## Branching Strategy
+### 4. Branching Strategy
 
-### Main Branches
+#### 4.1 Main Branches
 - `main` - Production-ready code
 - `develop` - Integration branch for features
 - `feature/*` - New features
 - `hotfix/*` - Emergency fixes
 - `release/*` - Release preparation
 
-### Branch Operations
+#### 4.2 Branch Operations
 ```bash
 # Create new branch
 git checkout -b feature/new-feature
@@ -96,9 +128,9 @@ git branch -d <branch-name>  # Local delete
 git push origin --delete <branch-name>  # Remote delete
 ```
 
-## Best Practices
+### 5. Best Practices
 
-### Commit Messages
+#### 5.1 Commit Messages
 - Use clear, descriptive commit messages
 - Format: `<type>: <description>`
 - Types: feat, fix, docs, style, refactor, test, chore
@@ -110,58 +142,51 @@ git commit -m "fix: resolve data parsing issue"
 git commit -m "docs: update installation guide"
 ```
 
-### Git Ignore
-The project's `.gitignore` file handles:
-- Python artifacts (`__pycache__`, `.pyc`)
-- Virtual environments
-- Environment variables
-- IDE files
-- System files
-- Data files
+#### 5.2 Protecting Sensitive Data
+- Never commit `.env` files
+- Never commit API keys or credentials
+- Use `.gitignore` to exclude sensitive files
+- If you accidentally commit sensitive data:
+  ```bash
+  # Remove sensitive file from git history
+  git filter-branch --force --index-filter \
+  "git rm --cached --ignore-unmatch path/to/sensitive-file" \
+  --prune-empty --tag-name-filter cat -- --all
+  ```
 
-### Code Review Process
-1. Create feature branch
-2. Make changes and commit
-3. Push to remote
-4. Create Pull Request
-5. Address review comments
-6. Merge after approval
+### 6. Common Workflows
 
-## Common Workflows
-
-### Feature Development
+#### 6.1 Starting New Work
 ```bash
-# Start new feature
-git checkout develop
-git pull origin develop
-git checkout -b feature/new-feature
+# Get latest changes
+git checkout main
+git pull origin main
 
-# Work on feature
+# Create feature branch
+git checkout -b feature/your-feature
+
+# Make changes and commit
 git add .
 git commit -m "feat: add new feature"
-git push origin feature/new-feature
 
-# Create Pull Request through GitHub
+# Push to remote
+git push origin feature/your-feature
 ```
 
-### Hotfix Process
+#### 6.2 Updating Your Branch
 ```bash
-# Create hotfix branch
+# Get latest changes from main
 git checkout main
-git checkout -b hotfix/issue-fix
+git pull origin main
 
-# Fix issue
-git add .
-git commit -m "fix: critical issue"
-git push origin hotfix/issue-fix
-
-# Merge to main and develop after review
+# Update your feature branch
+git checkout feature/your-feature
+git merge main
 ```
 
-## Troubleshooting
+### 7. Troubleshooting
 
-### Common Issues and Solutions
-
+#### 7.1 Common Issues
 1. **Merge Conflicts**
 ```bash
 # When encountering merge conflicts
@@ -192,35 +217,28 @@ git stash list
 git stash pop
 ```
 
-### Git Help
-```bash
-# Get help for any command
-git help <command>
-git <command> --help
-```
-
-## Additional Resources
+### 8. Additional Resources
 
 - [Official Git Documentation](https://git-scm.com/doc)
 - [GitHub Guides](https://guides.github.com/)
 - [Git Cheat Sheet](https://education.github.com/git-cheat-sheet-education.pdf)
 
-## Project-Specific Guidelines
+### 9. Project-Specific Guidelines
 
-1. **Branch Naming Convention**
-   - Features: `feature/descriptive-name`
-   - Fixes: `fix/issue-description`
-   - Docs: `docs/document-name`
+#### 9.1 Branch Naming Convention
+- Features: `feature/descriptive-name`
+- Fixes: `fix/issue-description`
+- Docs: `docs/document-name`
 
-2. **Code Review Checklist**
-   - Code follows project style guide
-   - Tests are included
-   - Documentation is updated
-   - No sensitive data in commits
-   - Commit messages are clear
+#### 9.2 Code Review Checklist
+- Code follows project style guide
+- Tests are included
+- Documentation is updated
+- No sensitive data in commits
+- Commit messages are clear
 
-3. **Release Process**
-   - Version bumping
-   - Changelog updates
-   - Tag creation
-   - Deployment steps 
+#### 9.3 Release Process
+- Version bumping
+- Changelog updates
+- Tag creation
+- Deployment steps 

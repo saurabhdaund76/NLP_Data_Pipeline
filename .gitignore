@@ -1,3 +1,8 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
 # Python
 __pycache__/
 *.py[cod]
@@ -22,29 +27,106 @@ wheels/
 
 # Virtual Environment
 venv/
-ENV/
 env/
-
-# Environment variables
-.env
-service-account-key.json
+ENV/
+.venv/
+.env/
 
 # IDE
 .idea/
 .vscode/
 *.swp
 *.swo
+.DS_Store
+Thumbs.db
 
 # Logs
+logs/
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Local development settings
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Local data
+data/
+raw_data/
+processed_data/
+temp/
+tmp/
 
-# OS generated files
+# Credentials and Secrets
+*.pem
+*.key
+*.crt
+*.cer
+*.der
+*.priv
+*.pub
+credentials.json
+client_secrets.json
+service-account.json
+*_key.json
+*_credentials.json
+gcloud*.json
+.gcloud/
+.config/gcloud/
+
+# Test coverage
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Scraped data
+*.csv
+*.json
+*.xlsx
+*.xls
+*.db
+*.sqlite
+*.sqlite3
+
+# Compiled files
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.py[cod]
+*$py.class
+
+# Documentation builds
+docs/_build/
+site/
+
+# Operating System
 .DS_Store
 .DS_Store?
 ._*
@@ -62,3 +144,4 @@ data/
 *.csv
 *.json
 *.pdf 
+*.nlp_data_pipeline/nlp-data-pipeline-01f4b58e4ff1.json

@@ -1,78 +1,123 @@
-# NLP Data Collection Pipeline
+# NLP Data Pipeline
 
-A comprehensive data collection pipeline for gathering and storing data from multiple sources in Google Cloud Storage.
-
-## Features
-- Multi-source data collection (News API, Web Scraping, PDFs)
-- Google Cloud Storage integration
-- Error handling and logging
-- Scalable architecture
-- Easy configuration
+A production-ready data pipeline for collecting, processing, and storing NLP data from various sources.
 
 ## Quick Start
+
+1. Clone the repository:
 ```bash
-# Clone the repository
-git clone https://github.com/your-username/nlp-data-pipeline.git
+git clone https://github.com/username/nlp-data-pipeline.git
 cd nlp-data-pipeline
+```
 
-# Create virtual environment
+2. Set up virtual environment:
+```bash
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
+source venv/bin/activate  # or .\venv\Scripts\activate on Windows
 pip install -r requirements.txt
+```
 
-# Set up configuration
+3. Configure environment:
+```bash
 cp .env.example .env
-# Edit .env with your credentials
+# Edit .env with your settings
 ```
 
 ## Documentation
-- [Project Structure](docs/PROJECT_STRUCTURE.md)
-- [Hands-on Guide](docs/HANDS_ON_GUIDE.md)
 
-## Prerequisites
-- Python 3.8+
-- Google Cloud account
-- News API account
-- Git
+### Setup Guides
+- [Git Guide](docs/GIT_GUIDE.md) - Complete guide for Git setup and usage
+- [Google Cloud Guide](docs/GOOGLE_CLOUD_GUIDE.md) - Detailed instructions for Google Cloud Storage setup
 
-## Project Structure
-```
-nlp_data_pipeline/
-├── src/               # Main code
-├── config/            # Configuration files
-├── examples/          # Example scripts
-└── logs/             # Log files
-```
+### Project Documentation
+- [Project Structure](docs/PROJECT_STRUCTURE.md) - Overview of project organization
+- [API Reference](docs/API_REFERENCE.md) - API documentation
+- [Architecture](docs/ARCHITECTURE.md) - System architecture details
+
+## Features
+
+- Multiple data sources support:
+  - Web scraping
+  - News APIs
+  - PDF documents
+  
+- Flexible storage options:
+  - Local file system
+  - Google Cloud Storage
+  
+- Data processing:
+  - Text cleaning
+  - NLP processing
+  - Data transformation
+
+## Storage Options
+
+### Local Storage
+- File-based storage
+- Multiple formats (JSON, CSV, Pickle)
+- Organized directory structure
+
+### Google Cloud Storage
+- Cloud-based storage
+- Scalable and secure
+- Automated backups
 
 ## Configuration
-1. Set up Google Cloud credentials
-2. Configure News API key
-3. Update storage settings
 
-## Usage Examples
-```python
-# Collect news data
-from src.collectors.web.news_scraper import NewsScraper
-scraper = NewsScraper(config)
-data = scraper.scrape_article(url)
+The project uses both `.env` files and YAML configurations:
 
-# Store in Google Cloud
-from src.storage.gcs_storage import GCSStorage
-storage = GCSStorage(config)
-storage.store_data(data, "news")
+1. Environment Variables (`.env`):
+```env
+NEWS_API_KEY=your_key
+GOOGLE_CLOUD_KEY=your_key
+```
+
+2. YAML Configurations:
+```yaml
+storage:
+  local:
+    base_path: "./data"
+  cloud:
+    bucket: "your-bucket"
+```
+
+## Development
+
+### Prerequisites
+- Python 3.8+
+- Git
+- Google Cloud SDK (for cloud storage)
+
+### Setting Up Development Environment
+1. Follow the [Git Guide](docs/GIT_GUIDE.md)
+2. Set up cloud storage using [Google Cloud Guide](docs/GOOGLE_CLOUD_GUIDE.md)
+3. Install dependencies
+4. Configure environment variables
+
+### Running Tests
+```bash
+pytest tests/
 ```
 
 ## Contributing
+
 1. Fork the repository
-2. Create feature branch
-3. Commit changes
-4. Push to branch
-5. Create Pull Request
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+See [Git Guide](docs/GIT_GUIDE.md) for detailed instructions.
+
+## Security
+
+- Never commit sensitive data
+- Use environment variables for secrets
+- Follow security best practices in [Google Cloud Guide](docs/GOOGLE_CLOUD_GUIDE.md)
 
 ## License
-MIT License - See [LICENSE](LICENSE) file
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Contact
 - Create an issue for bug reports or feature requests
